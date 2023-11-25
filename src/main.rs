@@ -1,6 +1,6 @@
 use axum::routing::{get, post};
 use axum::{extract::Json, response::Json as JsonResponse, Router};
-use diesel::{prelude::*, sql_query};
+use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::net::SocketAddr;
