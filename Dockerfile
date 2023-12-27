@@ -1,5 +1,5 @@
 # Use the official Rust image as the build stage
-FROM rust:latest as builder
+FROM rust:1.74.0-alpine3.18 as builder
 
 # Install the required updates & dependencies
 # RUN apt-get update 
