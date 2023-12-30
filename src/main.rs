@@ -56,7 +56,7 @@ async fn main() {
         .layer(cors); // tower-http 0.5 Not yet supported for
 
     // Run the server with hyper on http://127.0.0.1:5050
-    let addr = SocketAddr::from(([127, 0, 0, 1], 5050));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 5050));
     info!("[!] API Server listening: http://{}", addr);
 
     axum::Server::bind(&addr)
