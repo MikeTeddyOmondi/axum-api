@@ -48,3 +48,11 @@ http://localhost:5050/todos
 
 ```
 
+## Benchmarks
+
+Using the [rewrk](https://github.com/ChillFish8/rewrk) HTTP load benchmarker
+
+```sh
+rewrk -c 256 -d 60s -h http://localhost:5050/todos --pct
+```
+

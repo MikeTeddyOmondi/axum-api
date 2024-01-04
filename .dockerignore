@@ -1,0 +1,16 @@
+.vscode
+.justfile
+.gitignore
+.dockerignore
+.env
+.env.sample
+
+sqlite.db
+README.md
+EXAMPLE.md
+Dockerfile
+docker-compose.yml
+
+# Folders
+**/target
+
