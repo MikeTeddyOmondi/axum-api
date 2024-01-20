@@ -2,10 +2,10 @@
 
 diesel::table! {
     todos (id) {
-        id -> Integer,
+        id -> Int4,
         public_id -> Text,
         title -> Text,
         description -> Text,
-        completed -> Integer,
+        completed -> Bool,
     }
 }
