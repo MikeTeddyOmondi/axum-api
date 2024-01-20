@@ -3,7 +3,7 @@
 Technologies:
 
 - Language: Rust
-- Database: SQLite
+- Database: Postgres
 - ORM: Diesel
 
 ### Start in dev mode with `cargo-watch`
