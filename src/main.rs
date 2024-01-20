@@ -53,7 +53,7 @@ async fn main() {
         .route("/todos/:public_id", put(complete_todo))
         .route("/todos/:public_id", delete(delete_todo))
         .route("/todos/clear", delete(delete_all_todos))
-        .layer(cors); // tower-http 0.5 Not yet supported for
+        .layer(cors); // tower-http 0.5 not yet supported for Axum 0.6
 
     // Run the server with hyper on http://127.0.0.1:5050
     let addr = SocketAddr::from(([0, 0, 0, 0], 5050));
@@ -146,10 +146,10 @@ async fn complete_todo(Path(public_id): Path<Uuid>) -> JsonResponse<Value> {
 
     let todo = &data[0];
 
-    if todo.completed == 0 {
+    if todo.completed == false {
         let updated_rows = diesel::update(todos)
             .filter(schema::todos::public_id.eq(public_id.to_string()))
-            .set(completed.eq(1))
+            .set(completed.eq(true))
             .execute(&mut connection)
             .unwrap();
 
@@ -163,10 +163,10 @@ async fn complete_todo(Path(public_id): Path<Uuid>) -> JsonResponse<Value> {
             },
             "data": { "message": "Todo completed!" },
         }));
-    } else if todo.completed == 1 {
+    } else if todo.completed == false {
         let updated_rows = diesel::update(todos)
             .filter(schema::todos::public_id.eq(public_id.to_string()))
-            .set(completed.eq(0))
+            .set(completed.eq(true))
             .execute(&mut connection)
             .unwrap();
 
