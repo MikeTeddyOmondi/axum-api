@@ -17,5 +17,5 @@ pub struct Todo {
     pub public_id: String,
     pub title: String,
     pub description: String,
-    pub completed: i32,
+    pub completed: bool,
 }
