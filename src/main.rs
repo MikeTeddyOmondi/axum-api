@@ -8,14 +8,17 @@ use axum::{
     response::Json as JsonResponse,
     Router,
 };
+use diesel::pg::Pg;
 // use diesel::sql_query;
 use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, to_string, Value};
+use std::error::Error;
 use std::net::SocketAddr;
 use tower_http::cors::CorsLayer;
 use tracing::{error, info};
 use uuid::Uuid;
+use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 
 mod db;
 mod models;
@@ -57,6 +60,11 @@ async fn main() {
 
     // Run the server with hyper on http://127.0.0.1:5050
     let addr = SocketAddr::from(([0, 0, 0, 0], 5050));
+
+    // Run embedded migrations
+    let mut connection = establish_connection();
+    let _migrations_result = run_migrations(&mut connection);
+
     info!("[!] API Server listening: http://{}", addr);
 
     axum::Server::bind(&addr)
@@ -276,4 +284,16 @@ async fn create_todos(Json(req_body): Json<UserInput>) -> JsonResponse<Value> {
         "success": "true",
         "data": new_todo,
     }))
+}
+
+fn run_migrations(connection: &mut impl MigrationHarness<Pg>) -> Result<(), Box<dyn Error + Send + Sync + 'static>> {
+    pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!();
+
+    // This will run the necessary migrations.
+    //
+    // See the documentation for `MigrationHarness` for
+    // all available methods.
+    connection.run_pending_migrations(MIGRATIONS)?;
+
+    Ok(())
 }

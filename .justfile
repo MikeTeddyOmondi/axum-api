@@ -8,11 +8,11 @@ run-dev-mode:
 
 # Build Docker Image
 build-image:
-  docker build -t ranckosolutionsinc/axum-todo-api:v1.0.0 . 
+  docker build -t ranckosolutionsinc/axum-todo-api:v2.0.0 . 
 
 # Run Docker Container
 run-container:
-  docker run -d -p 5050:5050 --restart always -e DATABASE_URL=sqlite.db --name axum-todo-api ranckosolutionsinc/axum-todo-api:v1.0.0 
+  docker run -d -p 5050:5050 --restart always -e DATABASE_URL=sqlite.db --name axum-todo-api ranckosolutionsinc/axum-todo-api:v2.0.0 
 
 # Docker compose 
 run-compose:
