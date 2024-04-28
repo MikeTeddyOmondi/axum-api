@@ -171,10 +171,10 @@ async fn complete_todo(Path(public_id): Path<Uuid>) -> JsonResponse<Value> {
             },
             "data": { "message": "Todo completed!" },
         }));
-    } else if todo.completed == false {
+    } else if todo.completed == true {
         let updated_rows = diesel::update(todos)
             .filter(schema::todos::public_id.eq(public_id.to_string()))
-            .set(completed.eq(true))
+            .set(completed.eq(false))
             .execute(&mut connection)
             .unwrap();
 
